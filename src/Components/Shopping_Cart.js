@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Added_Item from './Added_Item'
 
 export default class Shopping_Cart extends React.Component {
     constructor(){
         super();
         this.state = {
-            quantity: 0,
-            cart: [],
-            amount: []
+            
         }
     }
     componentDidMount(){
@@ -29,11 +28,7 @@ export default class Shopping_Cart extends React.Component {
     <div>
         <h1>Shopping cart</h1>
         <button onClick={() => this.getProducts()}>Load</button>
-        <div>{this.state.cart[0]}   {this.state.amount[0]}</div>
-        <div>{this.state.cart[1]}   {this.state.amount[1]}</div>
-        <div>{this.state.cart[2]}   {this.state.amount[2]}</div>
-        <div>{this.state.cart[3]}   {this.state.amount[3]}</div>
-        <div>{this.state.cart[4]}   {this.state.amount[4]}</div>
+        <Added_Item props={this.state.array[0]}/>
         <button onClick={() => {axios.get('/api/purchase'); this.getProducts()}}> purchase</button>
     </div>
         )
