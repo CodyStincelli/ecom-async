@@ -6,7 +6,7 @@ export default class Shopping_Cart extends React.Component {
     constructor(){
         super();
         this.state = {
-            
+            cart: []
         }
     }
     componentDidMount(){
@@ -14,21 +14,25 @@ export default class Shopping_Cart extends React.Component {
     }
     getProducts(){
         let array = []
-        let array2 =[]
         axios.get('/api/products').then((req, res) =>{
-          console.log(req.data)
-          req.data.forEach(element =>{ array.push(element.product_name), array2.push(element.quantity)})
-          this.setState({cart: array,
-                         amount: array2})
-            }
-        )
-    }
+            console.log(req.data)
+            req.data.forEach(element =>{ array.push(element)
+            this.setState({cart: array})
+              }
+          )
+      })}
     render(){
+        console.log(this.state.cart)
+        let JSX = this.state.cart.map((x) =>{
+            return(
+                <Added_Item props={{name:x.product_name, price:x.price, quantity:x.quantity, id:x.item_id}}/>
+            )
+        })
         return(
     <div>
         <h1>Shopping cart</h1>
         <button onClick={() => this.getProducts()}>Load</button>
-        <Added_Item props={this.state.array[0]}/>
+        {JSX}
         <button onClick={() => {axios.get('/api/purchase'); this.getProducts()}}> purchase</button>
     </div>
         )

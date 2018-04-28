@@ -13,7 +13,6 @@ class Home extends Component {
       <Product props={{name:'Flour', itemID:3}}/>
       <Product props={{name:'Bacon', itemID:4}}/>
       <Product props={{name:'Butter', itemID:5}}/>
-      hi
     </div>
     )
   }
